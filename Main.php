@@ -42,14 +42,69 @@ $conn->close();
     <!-- Our Main Content  -->
   <div class="main">
        <!-- Pagination links -->
-       
-     <ul class="pagination justify-content-end">
-          <?php
-         for ($i = 1; $i <= $totalPages; $i++) {
-           echo "<li class='page-item'><a class='page-link' href='?page=$i'>$i</a></li>";
-         }
-          ?>
-        </ul>
+       <?php
+// $totalPages = 10; // replace with your total pages count
+$currentPage = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+
+// calculate start and end page numbers
+$startPage = $currentPage > 5 ? $currentPage - 2 : 1;
+$endPage = $startPage + 4;
+if ($endPage > $totalPages) {
+    $endPage = $totalPages;
+}
+
+// generate navigation links
+echo '<ul class="pagination pagination-sm justify-content-end">';
+
+
+if ($currentPage > 1) {
+  echo '<li class="page-item"><a class="page-link" href="?page=1">First</a></li>';
+}
+// previous page link
+if ($currentPage > 1) {
+    echo '<li class="page-item"><a class="page-link" href="?page=' . ($currentPage - 1) . '">Previous</a></li>';
+}
+
+// generate page navigation links
+for ($i = $startPage; $i <= $endPage; $i++) {
+    if ($i == $currentPage) {
+        echo '<li class="page-item active"><a class="page-link" href="?page=' . $i . '">' . $i . '</a></li>';
+    } else {
+        echo '<li class="page-item"><a class="page-link" href="?page=' . $i . '">' . $i . '</a></li>';
+    }
+}
+
+// next page link
+if ($currentPage < $totalPages) {
+    echo '<li class="page-item"><a class="page-link" href="?page=' . ($currentPage + 1) . '">Next</a></li>';
+}
+
+// last page link
+if ($currentPage < $totalPages) {
+    echo '<li class="page-item"><a class="page-link" href="?page=' . $totalPages . '">Last</a></li>';
+}
+
+echo '</ul>';
+?>
+<!--        
+       <ul class="pagination pagination-sm justify-content-end">
+    <?php
+    // for ($i = 1; $i <= $totalPages; $i++) {
+        // echo "<li class='page-item'><a class='page-link' href='?page=$i'>$i</a></li>";
+    // }
+    // ?>
+    <li class="page-item">
+        <input type="text" id="goToPageInput" class="form-control" placeholder="Go to Page">
+        <button  class="go"  onclick="goToPage()" class="btn btn-primary">Go</button>
+    </li>
+</ul>
+
+<script>
+    function goToPage() {
+        var page = document.getElementById("goToPageInput").value;
+        window.location.href = "?page=" + page;
+    }
+</script> -->
     <div class="tab-content justify-content-center" id="pills-tabContent">
       <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
         <table class="table table-hover">
