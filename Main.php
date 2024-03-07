@@ -83,9 +83,18 @@ if ($currentPage < $totalPages) {
 if ($currentPage < $totalPages) {
     echo '<li class="page-item"><a class="page-link" href="?page=' . $totalPages . '">Last</a></li>';
 }
-
+echo '<button    onclick="goToPage()" class="btn btn-primary">Go to</button> 
+<input type="text" id="goToPageInput" class="form-control" placeholder="No">
+';
 echo '</ul>';
+
 ?>
+<script>
+    function goToPage() {
+        var page = document.getElementById("goToPageInput").value;
+        window.location.href = "?page=" + page;
+    }
+</script>
 <!--        
        <ul class="pagination pagination-sm justify-content-end">
     <?php

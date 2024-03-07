@@ -53,14 +53,16 @@ img.bep {
 
 
 table {
-    border: 1px solid #ccc;
+    border:none;
     border-collapse: collapse;
     margin: 0;
     padding: 0;
     width: 100%;
     table-layout: fixed;
   }
-  
+  .table>:not(:first-child) {
+    border-top: 2px solid#008cff !important;
+}
   table caption {
     font-size: 1.5em;
     margin: .5em 0 .75em;
@@ -84,6 +86,19 @@ table {
     text-transform: uppercase;
   }
   
+  .form-control{
+    margin-right: 10px !important;
+    margin-left: 10px !important;
+    width: 50px !important;
+}
+button.btn.btn-primary {
+  margin-left: 15px;
+}
+.pagination{
+  align-items: center;
+}
+
+
   @media screen and (max-width: 600px) {
     table {
       border: 0;
